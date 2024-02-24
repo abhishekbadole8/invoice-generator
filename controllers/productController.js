@@ -6,7 +6,6 @@ const addProducts = async (req, res) => {
     const userId = req.id;
     const { cartItems } = req.body;
 
-    console.log(cartItems,userId);
     let existingUser = await Product.create({ userId, cartItems });
     const pdfBuffer = await generatePDF(existingUser);
 

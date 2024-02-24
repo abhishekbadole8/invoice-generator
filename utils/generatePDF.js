@@ -5,7 +5,7 @@ const generatePDF = async (userData) => {
   return new Promise((resolve, reject) => {
     // Calculate total price
     let totalPrice = userData.cartItems.reduce((total, product) => {
-      return total + product.qty * product.rate;
+      return total + product.quantity * product.rate;
     }, 0);
 
     // Create HTML markup for the products list
@@ -172,10 +172,10 @@ const generatePDF = async (userData) => {
     userData.cartItems.forEach((product, index) => {
       htmlContent += `
             <tr ${(key = index)}>
-              <td>${product.productName}</td>
-              <td class="qtyCol">${product.qty}</td>
+              <td>${product.name}</td>
+              <td class="qtyCol">${product.quantity}</td>
               <td>${product.rate}</td>
-              <td>INR ${product.qty * product.rate}</td>
+              <td>INR ${product.quantity * product.rate}</td>
             </tr>    
       `;
     });
