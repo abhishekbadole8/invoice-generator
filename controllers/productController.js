@@ -1,5 +1,5 @@
 const Product = require("../models/productModel");
-const generatePDF = require("../utils/generatePDF");
+const generatePdf = require("../utils/generatePdf");
 
 const addProducts = async (req, res) => {
   try {
@@ -7,7 +7,7 @@ const addProducts = async (req, res) => {
     const { cartItems } = req.body;
 
     let existingUser = await Product.create({ userId, cartItems });
-    const pdfBuffer = await generatePDF(existingUser);
+    const pdfBuffer = await generatePdf(existingUser);
 
     res.setHeader("Content-Type", "application/pdf");
     res.setHeader("Content-Disposition", 'attachment; filename="products.pdf"');
