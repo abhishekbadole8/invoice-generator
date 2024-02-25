@@ -5,7 +5,10 @@ const puppeteer = require("puppeteer");
 
 const generatePdf = async (userData) => {
   try {
-    const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch({
+      executablePath: "/path/to/chrome",
+      devtools: true,
+    });
     const page = await browser.newPage();
 
     let totalPrice = userData.cartItems.reduce((total, product) => {
@@ -215,7 +218,6 @@ const generatePdf = async (userData) => {
   }
 };
 
-
 const addProducts = async (req, res) => {
   try {
     const userId = req.id;
@@ -227,7 +229,6 @@ const addProducts = async (req, res) => {
     res.setHeader("Content-Type", "application/pdf");
     res.setHeader("Content-Disposition", 'attachment; filename="products.pdf"');
     res.send(pdfBuffer);
-    
   } catch (error) {
     console.error("Error adding products:", error);
     res.status(500).json({ error: "Internal server error" });
